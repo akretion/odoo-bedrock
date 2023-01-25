@@ -1,4 +1,11 @@
+# Copyright 2016-2022 Camptocamp SA (http://www.camptocamp.com)
 #!/bin/bash
+
+if ! command -v psql &> /dev/null
+then
+    echo "psql could not be found, ignoring set_base_url script"
+    exit
+fi
 
 DOMAIN="${ODOO_BASE_URL}"
 
