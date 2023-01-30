@@ -17,6 +17,12 @@ if [ -n "$DOMAIN" ]; then
       exit 0
   fi
 
+  if [ "$( psql $DB_NAME -tAc "SELECT 1 FROM pg_tables WHERE tablename='ir_config_parameter'" )" != '1' ]
+  then
+      echo "Database $DB_NAME not initialized, ignoring script"
+      exit 0
+  fi
+
   echo "Setting Base URL to domain ${DOMAIN}"
   psql --quiet << EOF
 
